@@ -60,7 +60,7 @@ func newImplementationDetailByProvider(provider Provider) (*implementationDetail
 	return implDetail, nil
 }
 
-func (i *implementationDetail) CallInjector(typeSet *typeSet, graphScopeMap map[interface{}]reflect.Value) []reflect.Value {
+func (i *implementationDetail) callInjector(typeSet *typeSet, graphScopeMap map[interface{}]reflect.Value) []reflect.Value {
 
 	// Create new instance of implementation.
 	newInstance := reflect.New(i.implType.Elem())

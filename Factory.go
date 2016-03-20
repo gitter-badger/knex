@@ -310,7 +310,7 @@ func (self *Factory) getByImplDetail(implDetail *implementationDetail, typeSet *
 
 		// Call injector method.
 		typeSet.add(implType)
-		injectorResult := implDetail.CallInjector(typeSet, graphScopeMap)
+		injectorResult := implDetail.callInjector(typeSet, graphScopeMap)
 		err := self.valueToError(injectorResult[1])
 		if err == nil {
 
