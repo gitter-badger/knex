@@ -28,9 +28,8 @@ func NewFactory() *Factory {
 	}
 }
 
-// AddParent adds a parent factory.  If an implementation can not be
-// retrieved from the current factory then the factory will attempt to
-// retrieve it from the available parents.
+// AddParent adds a parent factory.  If there is a circular dependency return
+// a circular dependency error.
 func (self *Factory) AddParent(parent *Factory) error {
 
 	// If there is a circular dependency return an error.
