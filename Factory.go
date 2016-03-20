@@ -7,14 +7,6 @@ import (
 	"strings"
 )
 
-const (
-	injectorName         = "Inject"
-	requireTagName       = "require"
-	emptyString          = ""
-	implementationSource = 0
-	providerSource       = 1
-)
-
 var DefaultFactory = NewFactory()
 
 type Factory struct {

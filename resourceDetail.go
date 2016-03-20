@@ -6,12 +6,6 @@ import (
 	"strings"
 )
 
-const (
-	provideTagName = "provide"
-	idTagName      = "id"
-	scopeTagName   = "scope"
-)
-
 type resourceDetail struct {
 	interfaceType reflect.Type
 	provider      Provider
@@ -31,7 +25,7 @@ func newResourceDetail(implementationType interface{}) (*resourceDetail, error) 
 		if provideTagValue != emptyString {
 
 			// Check for valid 'provide' tag values.
-			if provideTagValue != "RESOURCE" {
+			if provideTagValue != resourceValue {
 				return nil, fmt.Errorf("Invalid provide value '%s'", provideTagValue)
 			}
 			resourceDetail.interfaceType = field.Type
@@ -77,7 +71,7 @@ func newResourceDetailByProvider(provider *Provider) (*resourceDetail, error) {
 }
 
 func validateScopeValue(value string) bool {
-	if value == emptyString || value == "FACTORY" || value == "GRAPH" {
+	if value == emptyString || value == factoryValue || value == graphValue {
 		return true
 	} else {
 		return false

@@ -106,7 +106,7 @@ func (i *implementationDetail) getInjectableFields(implementationType interface{
 		field := reflectType.Field(i)
 		requireTagValue := strings.ToUpper(strings.Trim(field.Tag.Get(requireTagName), " "))
 		if requireTagValue != emptyString {
-			if requireTagValue == "TRUE" || requireTagValue == "FALSE" {
+			if requireTagValue == trueValue || requireTagValue == falseValue {
 				returnValue = append(returnValue, field)
 			} else {
 				return nil, fmt.Errorf("Invalid require value '%s'", requireTagValue)
