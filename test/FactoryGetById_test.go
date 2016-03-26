@@ -20,7 +20,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(typeWithIdImpl))
+				factory.Register(new(typeWithIDImpl))
 				impl, err = factory.GetById("testId")
 			})
 
@@ -30,7 +30,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return an implementaion of the correct type", func() {
 				Ω(impl).ShouldNot(BeNil())
-				Ω(impl).Should(BeEquivalentTo(new(typeWithIdImpl)))
+				Ω(impl).Should(BeEquivalentTo(new(typeWithIDImpl)))
 			})
 		})
 
@@ -63,7 +63,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(typeWithIdImpl))
+				factory.Register(new(typeWithIDImpl))
 				factory.Register(new(TypeWithRequiresWithIdImpl))
 				impl, err = factory.GetByType(new(TypeWithRequiresWithId))
 			})
@@ -73,7 +73,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := NewTypeWithRequiresWithIdImpl(new(typeWithIdImpl))
+				compareValue, _ := NewTypeWithRequiresWithIdImpl(new(typeWithIDImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -81,7 +81,7 @@ var _ = Describe("Factory", func() {
 			It("should inject the approprite type(s)", func() {
 				value := impl.(*TypeWithRequiresWithIdImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
-				Ω(value).Should(BeEquivalentTo(new(typeWithIdImpl)))
+				Ω(value).Should(BeEquivalentTo(new(typeWithIDImpl)))
 			})
 		})
 
