@@ -1,4 +1,4 @@
 package test
 
-type TypeWithCircularDependency interface {
+type typeWithCircularDependency interface {
 }
