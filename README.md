@@ -1,6 +1,6 @@
 # knex
 
-[![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex) [![Coverage Status](https://coveralls.io/repos/github/chrisehlen/knex/badge.svg?branch=master)](https://coveralls.io/github/chrisehlen/knex?branch=master) [![GoDoc](https://godoc.org/github.com/chrisehlen/knex/go-mock?status.svg)](https://godoc.org/github.com/chrisehlen/knex)
+[![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex) [![Coverage Status](https://coveralls.io/repos/github/chrisehlen/knex/badge.svg?branch=master)](https://coveralls.io/github/chrisehlen/knex?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/chrisehlen/knex)](https://goreportcard.com/report/github.com/chrisehlen/knex) [![GoDoc](https://godoc.org/github.com/chrisehlen/knex/go-mock?status.svg)](https://godoc.org/github.com/chrisehlen/knex)
 
 Dependency injection framework for [Go](http://golang.org/).
 
@@ -21,7 +21,7 @@ go get github.com/onsi/gomega
 
 Knex is an easy to use api that uses Go tags to define relationships between components.
 
-Examples below can be found at [knex-example](https://github.com/chrisehlen/knex-example/)
+Examples below can be found at [knex-example](https://github.com/chrisehlen/knex-example/).
 
 **Define component(s) that provides an implementation**
 
