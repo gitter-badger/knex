@@ -1,15 +1,21 @@
 # knex
 
-[![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex)
+[![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex) [![Coverage Status](https://coveralls.io/repos/github/chrisehlen/knex/badge.svg?branch=master)](https://coveralls.io/github/chrisehlen/knex?branch=master) [![GoDoc](https://godoc.org/github.com/chrisehlen/knex/go-mock?status.svg)](https://godoc.org/github.com/chrisehlen/knex)
 
 Dependency injection framework for [Go](http://golang.org/).
 
-## Installation and Docs
+## Installation
 
-Install using `go get github.com/chrisehlen/knex`.
+Install 
 
-Full documentation is available at
-https://godoc.org/github.com/chrisehlen/knex
+`go get github.com/chrisehlen/knex`.
+
+Run tests
+
+```
+go get github.com/onsi/ginkgo/ginkgo
+go get github.com/onsi/gomega
+```
 
 ## Usage
 
