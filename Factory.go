@@ -539,7 +539,6 @@ func (f *Factory) valueToInterface(value reflect.Value) interface{} {
 	// Convert a reflect.Value to an interface{}.
 	if value.IsValid() && (value.Kind() == reflect.Struct || !value.IsNil()) {
 		return value.Interface()
-	} else {
-		return nil
 	}
+	return nil
 }
