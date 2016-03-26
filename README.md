@@ -1,5 +1,7 @@
 # knex
 
+[![Join the chat at https://gitter.im/chrisehlen/knex](https://badges.gitter.im/chrisehlen/knex.svg)](https://gitter.im/chrisehlen/knex?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex) [![Coverage Status](https://coveralls.io/repos/github/chrisehlen/knex/badge.svg?branch=master)](https://coveralls.io/github/chrisehlen/knex?branch=master) [![Go Report Card](https://goreportcard.com/badge/github.com/chrisehlen/knex)](https://goreportcard.com/report/github.com/chrisehlen/knex) [![GoDoc](https://godoc.org/github.com/chrisehlen/knex/go-mock?status.svg)](https://godoc.org/github.com/chrisehlen/knex)
 
 Dependency injection framework for [Go](http://golang.org/).
