@@ -1,4 +1,7 @@
 # knex
+
+[![Build Status](https://travis-ci.org/chrisehlen/knex.svg?branch=master)](https://travis-ci.org/chrisehlen/knex)
+
 Dependency injection framework for [Go](http://golang.org/).
 
 ## Installation and Docs
