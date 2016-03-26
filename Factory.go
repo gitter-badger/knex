@@ -79,7 +79,7 @@ func (self *Factory) GetAllOfType(interfaceType interface{}) (interface{}, error
 	// Check if any of this factories' parents has the type.
 	for _, parent := range self.parentSlice {
 
-		// Check if parent has implementation(s) or propogate any error.
+		// Check if parent has implementation(s) or propagate any error.
 		result, err := parent.GetAllOfType(interfaceType)
 		reflectSlice := reflect.ValueOf(result)
 		if err != nil || reflectSlice.Len() > 0 {
@@ -267,7 +267,7 @@ func (self *Factory) getByField(field reflect.StructField, typeSet *typeSet, gra
 	// Check if any of this factories' parents has the type.
 	for _, parent := range self.parentSlice {
 
-		// Check if parent has implementation(s) or propogate any error.
+		// Check if parent has implementation(s) or propagate any error.
 		reflectResult := parent.getByField(field, typeSet, graphScopeMap)
 		err := self.valueToError(reflectResult[1])
 		if err == nil || !strings.HasPrefix(err.Error(), "Undeclared resource") {
@@ -281,7 +281,7 @@ func (self *Factory) getByField(field reflect.StructField, typeSet *typeSet, gra
 
 func (self *Factory) getByImplDetail(implDetail *implementationDetail, typeSet *typeSet, graphScopeMap map[interface{}]reflect.Value) []reflect.Value {
 
-	// If there is an implementation availble within scope return it.
+	// If there is an implementation available within scope return it.
 	reuseValue, exists := self.getScopeImpl(implDetail, graphScopeMap)
 	if exists {
 		return []reflect.Value{
@@ -313,7 +313,7 @@ func (self *Factory) getByImplDetail(implDetail *implementationDetail, typeSet *
 		err := self.valueToError(injectorResult[1])
 		if err == nil {
 
-			// Add resource to Factory or Graph scope if neccessary.
+			// Add resource to Factory or Graph scope if necessary.
 			if implDetail.resourceDetail.provider.Scope == "FACTORY" {
 				self.factoryScopeMap[implType] = injectorResult[0]
 			} else if implDetail.resourceDetail.provider.Scope == "GRAPH" {
@@ -335,7 +335,7 @@ func (self *Factory) getByImplDetail(implDetail *implementationDetail, typeSet *
 		}
 		reflectValue := reflect.ValueOf(newInstance)
 
-		// Add resource to Factory or Graph scope if neccessary.
+		// Add resource to Factory or Graph scope if necessary.
 		if implDetail.resourceDetail.provider.Scope == "FACTORY" {
 			self.factoryScopeMap[&implDetail.resourceDetail.provider.Instance] = reflectValue
 		} else if implDetail.resourceDetail.provider.Scope == "GRAPH" {
@@ -360,7 +360,7 @@ func (self *Factory) getByReflectType(reflectType reflect.Type) (interface{}, er
 		// Check if any of this factories' parents has the type.
 		for _, parent := range self.parentSlice {
 
-			// Check if parent has an implementation, propogate any error except for
+			// Check if parent has an implementation, propagate any error except for
 			// "Undeclared resource...", otherwise move on to next parent.
 			impl, err := parent.getByReflectType(reflectType)
 			if err == nil {
@@ -410,7 +410,7 @@ func (self *Factory) getReflectValueById(id string) []reflect.Value {
 		// Check if any of this factories' parents has the type.
 		for _, parent := range self.parentSlice {
 
-			// Check if parent has an implementation, propogate any error except for
+			// Check if parent has an implementation, propagate any error except for
 			// "Undeclared resource...", otherwise move on to next parent.
 			reflectResult := parent.getReflectValueById(id)
 			err := self.valueToError(reflectResult[1])
