@@ -54,7 +54,7 @@ func (self *ConsoleWriterImpl) Inject() error {return nil}
 func (self *ConsoleWriterImpl) Write(message string) error {...}
 ```
 
-[ConsoleWriterImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/ConsoleWriterImpl.go) is an implementation of the [Writer](https://github.com/chrisehlen/knex-example/blob/master/spi/Writer.go) interface that sends all input to standard output. [ConsoleWriterImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/ConsoleWriterImpl.go) has no requires so it's Inject() method has zero arguments.
+[ConsoleWriterImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/ConsoleWriterImpl.go) is an implementation of the [Writer](https://github.com/chrisehlen/knex-example/blob/master/spi/Writer.go) interface that sends the given message to standard output. [ConsoleWriterImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/ConsoleWriterImpl.go) has no requires so it's Inject() method has zero arguments.
 
 **Define component(s) that require implementation(s)**
 
