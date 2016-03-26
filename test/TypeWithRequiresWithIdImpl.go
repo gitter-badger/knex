@@ -5,7 +5,7 @@ type typeWithRequiresWithIDImpl struct {
 	InjectedType           typeWithNoRequires `require:"true" id:"testId"`
 }
 
-func newTypeWithRequiresWithIdImpl(injectedType typeWithNoRequires) (*typeWithRequiresWithIDImpl, error) {
+func newTypeWithRequiresWithIDImpl(injectedType typeWithNoRequires) (*typeWithRequiresWithIDImpl, error) {
 
 	newInstance := new(typeWithRequiresWithIDImpl)
 

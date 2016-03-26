@@ -73,7 +73,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := newTypeWithRequiresWithIdImpl(new(typeWithIDImpl))
+				compareValue, _ := newTypeWithRequiresWithIDImpl(new(typeWithIDImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -159,7 +159,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := newTypeWithRequiresWithIdImpl(new(typeWithNoRequiresOneImpl))
+				compareValue, _ := newTypeWithRequiresWithIDImpl(new(typeWithNoRequiresOneImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
