@@ -1,18 +1,19 @@
 package test
 
-type TypeWithGraphScopeImpl struct {
-	TypeWithNoRequires `provide:"resource" scope:"graph"`
+type typeWithGraphScopeImpl struct {
+	typeWithNoRequires `provide:"resource" scope:"graph"`
 	Value              string
 }
 
-func NewTypeWithGraphScopeImpl() (*TypeWithGraphScopeImpl, error) {
+func newTypeWithGraphScopeImpl() (*typeWithGraphScopeImpl, error) {
 
-	newInstance := new(TypeWithGraphScopeImpl)
+	newInstance := new(typeWithGraphScopeImpl)
 	newInstance.Value = "Initial value"
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithGraphScopeImpl) Inject() error {
+// Inject required dependencies
+func (t *typeWithGraphScopeImpl) Inject() error {
 	return nil
 }

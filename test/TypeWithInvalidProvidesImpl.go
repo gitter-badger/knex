@@ -1,16 +1,17 @@
 package test
 
-type TypeWithInvalidProvidesImpl struct {
+type typeWithInvalidProvidesImpl struct {
 	typeWithRequires `provide:"BadValue"`
 }
 
-func NewTypeWithInvalidProvidesImpl() (*TypeWithInvalidProvidesImpl, error) {
+func newTypeWithInvalidProvidesImpl() (*typeWithInvalidProvidesImpl, error) {
 
-	newInstance := new(TypeWithInvalidProvidesImpl)
+	newInstance := new(typeWithInvalidProvidesImpl)
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithInvalidProvidesImpl) Inject() error {
+// Inject required dependencies
+func (t *typeWithInvalidProvidesImpl) Inject() error {
 	return nil
 }

@@ -10,8 +10,8 @@ import (
 var _ = Describe("Factory", func() {
 
 	var (
-		implOne TypeWithNoRequires
-		implTwo TypeWithNoRequires
+		implOne typeWithNoRequires
+		implTwo typeWithNoRequires
 		errOne  error
 		errTwo  error
 	)
@@ -21,10 +21,10 @@ var _ = Describe("Factory", func() {
 		Context("when there are no requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithFactoryScopeImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithNoRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithNoRequires))
-				implTwo.(*TypeWithFactoryScopeImpl).Value = "Updated value"
+				factory.Register(new(typeWithFactoryScopeImpl))
+				implOne, errOne = factory.GetByType(new(typeWithNoRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithNoRequires))
+				implTwo.(*typeWithFactoryScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -42,11 +42,11 @@ var _ = Describe("Factory", func() {
 		Context("when there are requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithFactoryScopeImpl))
-				factory.Register(new(TypeWithRequiresImpl))
+				factory.Register(new(typeWithFactoryScopeImpl))
+				factory.Register(new(typeWithRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
-				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithFactoryScopeImpl).Value = "Updated value"
+				implTwo.(*typeWithRequiresImpl).InjectedType.(*typeWithFactoryScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -57,7 +57,7 @@ var _ = Describe("Factory", func() {
 			It("should return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
 				Ω(implTwo).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithRequiresImpl).InjectedType).Should(Equal(implTwo.(*TypeWithRequiresImpl).InjectedType))
+				Ω(implOne.(*typeWithRequiresImpl).InjectedType).Should(Equal(implTwo.(*typeWithRequiresImpl).InjectedType))
 			})
 		})
 	})
@@ -68,15 +68,15 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
-					Type:  new(TypeWithNoRequires),
+					Type:  new(typeWithNoRequires),
 					Scope: "factory",
 					Instance: func() (interface{}, error) {
-						return &TypeWithValueImpl{Value: "Initial value"}, nil
+						return &typeWithValueImpl{Value: "Initial value"}, nil
 					},
 				})
-				implOne, errOne = factory.GetByType(new(TypeWithNoRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithNoRequires))
-				implTwo.(*TypeWithValueImpl).Value = "Updated value"
+				implOne, errOne = factory.GetByType(new(typeWithNoRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithNoRequires))
+				implTwo.(*typeWithValueImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -94,18 +94,18 @@ var _ = Describe("Factory", func() {
 		Context("when there are requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithRequiresImpl))
+				factory.Register(new(typeWithRequiresImpl))
 				factory.RegisterProvider(knex.Provider{
-					Type:  new(TypeWithNoRequires),
+					Type:  new(typeWithNoRequires),
 					Scope: "factory",
 					Instance: func() (interface{}, error) {
-						return &TypeWithValueImpl{Value: "Initial value"}, nil
+						return &typeWithValueImpl{Value: "Initial value"}, nil
 					},
 				})
 
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
-				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithValueImpl).Value = "Updated value"
+				implTwo.(*typeWithRequiresImpl).InjectedType.(*typeWithValueImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -116,7 +116,7 @@ var _ = Describe("Factory", func() {
 			It("should return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
 				Ω(implTwo).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithRequiresImpl).InjectedType).Should(Equal(implTwo.(*TypeWithRequiresImpl).InjectedType))
+				Ω(implOne.(*typeWithRequiresImpl).InjectedType).Should(Equal(implTwo.(*typeWithRequiresImpl).InjectedType))
 			})
 		})
 	})

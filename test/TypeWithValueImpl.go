@@ -1,5 +1,5 @@
 package test
 
-type TypeWithValueImpl struct {
+type typeWithValueImpl struct {
 	Value string
 }

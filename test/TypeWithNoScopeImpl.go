@@ -1,7 +1,7 @@
 package test
 
 type typeWithNoScopeImpl struct {
-	TypeWithNoRequires `provide:"resource"`
+	typeWithNoRequires `provide:"resource"`
 	Value              string
 }
 
@@ -13,6 +13,7 @@ func newTypeWithNoScopeImpl() (*typeWithNoScopeImpl, error) {
 	return newInstance, newInstance.Inject()
 }
 
+// Inject injects required dependencies
 func (t *typeWithNoScopeImpl) Inject() error {
 	return nil
 }

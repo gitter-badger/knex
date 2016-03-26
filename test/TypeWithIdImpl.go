@@ -1,16 +1,17 @@
 package test
 
 type typeWithIDImpl struct {
-	TypeWithNoRequires `provide:"resource" id:"testId"`
+	typeWithNoRequires `provide:"resource" id:"testId"`
 }
 
-func newTypeWithIDImpl(injectedType TypeWithNoRequires) (*typeWithIDImpl, error) {
+func newTypeWithIDImpl(injectedType typeWithNoRequires) (*typeWithIDImpl, error) {
 
 	newInstance := new(typeWithIDImpl)
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *typeWithIDImpl) Inject() error {
+// Inject required dependencies
+func (t *typeWithIDImpl) Inject() error {
 	return nil
 }

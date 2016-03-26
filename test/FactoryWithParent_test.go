@@ -12,7 +12,7 @@ var _ = Describe("Factory", func() {
 	Describe("has a parent", func() {
 
 		var (
-			impl TypeWithNoRequires
+			impl typeWithNoRequires
 			err  error
 		)
 
@@ -24,7 +24,7 @@ var _ = Describe("Factory", func() {
 					parent.Register(new(typeWithNoRequiresOneImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					impl, err = child.GetByType(new(TypeWithNoRequires))
+					impl, err = child.GetByType(new(typeWithNoRequires))
 				})
 
 				It("should be successful", func() {
@@ -40,10 +40,10 @@ var _ = Describe("Factory", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
 					parent.Register(new(typeWithNoRequiresOneImpl))
-					parent.Register(new(TypeWithNoRequiresTwoImpl))
+					parent.Register(new(typeWithNoRequiresTwoImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					impl, err = child.GetAllOfType(new(TypeWithNoRequires))
+					impl, err = child.GetAllOfType(new(typeWithNoRequires))
 				})
 
 				It("should be successful", func() {
@@ -52,7 +52,7 @@ var _ = Describe("Factory", func() {
 
 				It("should return the parents' implementation", func() {
 					Ω(impl).ShouldNot(BeNil())
-					Ω(impl).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
+					Ω(impl).Should(BeEquivalentTo([]typeWithNoRequires{new(typeWithNoRequiresOneImpl), new(typeWithNoRequiresTwoImpl)}))
 				})
 			})
 
@@ -80,7 +80,7 @@ var _ = Describe("Factory", func() {
 					parent.Register(new(typeWithNoRequiresOneImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					child.Register(new(TypeWithRequiresImpl))
+					child.Register(new(typeWithRequiresImpl))
 					impl, err = child.GetByType(new(typeWithRequires))
 				})
 
@@ -89,7 +89,7 @@ var _ = Describe("Factory", func() {
 				})
 
 				It("should return the parents' implementation", func() {
-					Ω(impl.(*TypeWithRequiresImpl).InjectedType).ShouldNot(BeNil())
+					Ω(impl.(*typeWithRequiresImpl).InjectedType).ShouldNot(BeNil())
 				})
 			})
 
@@ -97,10 +97,10 @@ var _ = Describe("Factory", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
 					parent.Register(new(typeWithNoRequiresOneImpl))
-					parent.Register(new(TypeWithNoRequiresTwoImpl))
+					parent.Register(new(typeWithNoRequiresTwoImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					child.Register(new(TypeWithSliceRequiresImpl))
+					child.Register(new(typeWithSliceRequiresImpl))
 					impl, err = child.GetByType(new(typeWithRequires))
 				})
 
@@ -110,7 +110,7 @@ var _ = Describe("Factory", func() {
 
 				It("should return the parents' implementation", func() {
 					Ω(impl).ShouldNot(BeNil())
-					Ω(impl.(*TypeWithSliceRequiresImpl).InjectedType).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
+					Ω(impl.(*typeWithSliceRequiresImpl).InjectedType).Should(BeEquivalentTo([]typeWithNoRequires{new(typeWithNoRequiresOneImpl), new(typeWithNoRequiresTwoImpl)}))
 				})
 			})
 
@@ -120,7 +120,7 @@ var _ = Describe("Factory", func() {
 					parent.Register(new(typeWithIDImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					child.Register(new(TypeWithRequiresWithIdImpl))
+					child.Register(new(typeWithRequiresWithIdImpl))
 					impl, err = child.GetByType(new(typeWithRequiresWithId))
 				})
 
@@ -129,7 +129,7 @@ var _ = Describe("Factory", func() {
 				})
 
 				It("should return the parents' implementation", func() {
-					Ω(impl.(*TypeWithRequiresWithIdImpl).InjectedType).ShouldNot(BeNil())
+					Ω(impl.(*typeWithRequiresWithIdImpl).InjectedType).ShouldNot(BeNil())
 				})
 			})
 		})

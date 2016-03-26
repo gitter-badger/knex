@@ -1,16 +1,17 @@
 package test
 
-type TypeWithNoRequiresTwoImpl struct {
-	TypeWithNoRequires `provide:"resource"`
+type typeWithNoRequiresTwoImpl struct {
+	typeWithNoRequires `provide:"resource"`
 }
 
-func NewTypeWithNoRequiresTwoImpl() (*TypeWithNoRequiresTwoImpl, error) {
+func NewTypeWithNoRequiresTwoImpl() (*typeWithNoRequiresTwoImpl, error) {
 
-	newInstance := new(TypeWithNoRequiresTwoImpl)
+	newInstance := new(typeWithNoRequiresTwoImpl)
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithNoRequiresTwoImpl) Inject() error {
+// Inject injects required dependencies
+func (t *typeWithNoRequiresTwoImpl) Inject() error {
 	return nil
 }

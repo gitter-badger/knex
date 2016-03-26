@@ -1,18 +1,19 @@
 package test
 
-type TypeWithRequiresImpl struct {
+type typeWithRequiresImpl struct {
 	typeWithRequires `provide:"resource"`
-	InjectedType     TypeWithNoRequires `require:"true"`
+	InjectedType     typeWithNoRequires `require:"true"`
 }
 
-func NewTypeWithRequiresImpl(injectedType TypeWithNoRequires) (*TypeWithRequiresImpl, error) {
+func newTypeWithRequiresImpl(injectedType typeWithNoRequires) (*typeWithRequiresImpl, error) {
 
-	newInstance := new(TypeWithRequiresImpl)
+	newInstance := new(typeWithRequiresImpl)
 
 	return newInstance, newInstance.Inject(injectedType)
 }
 
-func (self *TypeWithRequiresImpl) Inject(injectedType TypeWithNoRequires) error {
-	self.InjectedType = injectedType
+// Inject injects required dependencies
+func (t *typeWithRequiresImpl) Inject(injectedType typeWithNoRequires) error {
+	t.InjectedType = injectedType
 	return nil
 }

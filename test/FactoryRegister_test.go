@@ -31,7 +31,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				err = factory.Register(new(TypeWithInvalidRequiresImpl))
+				err = factory.Register(new(typeWithInvalidRequiresImpl))
 			})
 
 			It("should return a 'Invalid require value' error", func() {
@@ -43,7 +43,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				err = factory.Register(new(TypeWithInvalidProvidesImpl))
+				err = factory.Register(new(typeWithInvalidProvidesImpl))
 			})
 
 			It("should return a 'Invalid provide value' error", func() {

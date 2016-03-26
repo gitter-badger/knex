@@ -1,20 +1,21 @@
 package test
 
-type TypeWithMultipleRequiresImpl struct {
+type typeWithMultipleRequiresImpl struct {
 	typeWithRequires `provide:"resource"`
-	InjectedTypeOne  TypeWithNoRequires `require:"true"`
-	InjectedTypeTwo  TypeWithNoRequires `require:"true"`
+	InjectedTypeOne  typeWithNoRequires `require:"true"`
+	InjectedTypeTwo  typeWithNoRequires `require:"true"`
 }
 
-func NewTypeWithMultipleRequiresImpl(injectedTypeOne TypeWithNoRequires, injectedTypeTwo TypeWithNoRequires) (*TypeWithMultipleRequiresImpl, error) {
+func newTypeWithMultipleRequiresImpl(injectedTypeOne typeWithNoRequires, injectedTypeTwo typeWithNoRequires) (*typeWithMultipleRequiresImpl, error) {
 
-	newInstance := new(TypeWithMultipleRequiresImpl)
+	newInstance := new(typeWithMultipleRequiresImpl)
 
 	return newInstance, newInstance.Inject(injectedTypeOne, injectedTypeTwo)
 }
 
-func (self *TypeWithMultipleRequiresImpl) Inject(injectedTypeOne TypeWithNoRequires, injectedTypeTwo TypeWithNoRequires) error {
-	self.InjectedTypeOne = injectedTypeOne
-	self.InjectedTypeTwo = injectedTypeTwo
+// Inject required dependencies
+func (t *typeWithMultipleRequiresImpl) Inject(injectedTypeOne typeWithNoRequires, injectedTypeTwo typeWithNoRequires) error {
+	t.InjectedTypeOne = injectedTypeOne
+	t.InjectedTypeTwo = injectedTypeTwo
 	return nil
 }

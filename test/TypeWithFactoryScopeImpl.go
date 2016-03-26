@@ -1,18 +1,19 @@
 package test
 
-type TypeWithFactoryScopeImpl struct {
-	TypeWithNoRequires `provide:"resource" scope:"factory"`
+type typeWithFactoryScopeImpl struct {
+	typeWithNoRequires `provide:"resource" scope:"factory"`
 	Value              string
 }
 
-func NewTypeWithFactoryScopeImpl() (*TypeWithFactoryScopeImpl, error) {
+func newTypeWithFactoryScopeImpl() (*typeWithFactoryScopeImpl, error) {
 
-	newInstance := new(TypeWithFactoryScopeImpl)
+	newInstance := new(typeWithFactoryScopeImpl)
 	newInstance.Value = "Initial value"
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithFactoryScopeImpl) Inject() error {
+// Inject required dependencies
+func (t *typeWithFactoryScopeImpl) Inject() error {
 	return nil
 }

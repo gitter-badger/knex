@@ -1,4 +1,4 @@
 package test
 
-type TypeWithNoRequires interface {
+type typeWithNoRequires interface {
 }

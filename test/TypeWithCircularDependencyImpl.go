@@ -1,18 +1,19 @@
 package test
 
-type TypeWithCircularDependencyImpl struct {
-	TypeWithCircularDependency `provide:"resource"`
-	injectedType               TypeWithCircularDependency `require:"true"`
+type typeWithCircularDependencyImpl struct {
+	typeWithCircularDependency `provide:"resource"`
+	injectedType               typeWithCircularDependency `require:"true"`
 }
 
-func NewTypeWithCircularDependencyImpl(injectedType TypeWithNoRequires) (*TypeWithCircularDependencyImpl, error) {
+func newTypeWithCircularDependencyImpl(injectedType typeWithNoRequires) (*typeWithCircularDependencyImpl, error) {
 
-	newInstance := new(TypeWithCircularDependencyImpl)
+	newInstance := new(typeWithCircularDependencyImpl)
 
 	return newInstance, newInstance.Inject(injectedType)
 }
 
-func (self *TypeWithCircularDependencyImpl) Inject(injectedType TypeWithCircularDependency) error {
-	self.injectedType = injectedType
+// Inject required dependencies
+func (t *typeWithCircularDependencyImpl) Inject(injectedType typeWithCircularDependency) error {
+	t.injectedType = injectedType
 	return nil
 }

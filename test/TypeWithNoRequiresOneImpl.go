@@ -1,7 +1,7 @@
 package test
 
 type typeWithNoRequiresOneImpl struct {
-	TypeWithNoRequires `provide:"resource"`
+	typeWithNoRequires `provide:"resource"`
 }
 
 func newTypeWithNoRequiresOneImpl() (*typeWithNoRequiresOneImpl, error) {
@@ -12,6 +12,6 @@ func newTypeWithNoRequiresOneImpl() (*typeWithNoRequiresOneImpl, error) {
 }
 
 // Inject injects required dependencies
-func (self *typeWithNoRequiresOneImpl) Inject() error {
+func (t *typeWithNoRequiresOneImpl) Inject() error {
 	return nil
 }

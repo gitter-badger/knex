@@ -10,8 +10,8 @@ import (
 var _ = Describe("Factory", func() {
 
 	var (
-		implOne TypeWithNoRequires
-		implTwo TypeWithNoRequires
+		implOne typeWithNoRequires
+		implTwo typeWithNoRequires
 		errOne  error
 		errTwo  error
 	)
@@ -22,8 +22,8 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithNoScopeImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithNoRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithNoRequires))
+				implOne, errOne = factory.GetByType(new(typeWithNoRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithNoRequires))
 				implTwo.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
@@ -43,10 +43,10 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithNoScopeImpl))
-				factory.Register(new(TypeWithRequiresImpl))
+				factory.Register(new(typeWithRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
-				implTwo.(*TypeWithRequiresImpl).InjectedType.(*typeWithNoScopeImpl).Value = "Updated value"
+				implTwo.(*typeWithRequiresImpl).InjectedType.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -57,7 +57,7 @@ var _ = Describe("Factory", func() {
 			It("should not return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
 				Ω(implTwo).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithRequiresImpl).InjectedType).ShouldNot(Equal(implTwo.(*TypeWithRequiresImpl).InjectedType))
+				Ω(implOne.(*typeWithRequiresImpl).InjectedType).ShouldNot(Equal(implTwo.(*typeWithRequiresImpl).InjectedType))
 			})
 		})
 
@@ -65,9 +65,9 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithNoScopeImpl))
-				factory.Register(new(TypeWithMultipleRequiresImpl))
+				factory.Register(new(typeWithMultipleRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
-				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*typeWithNoScopeImpl).Value = "Updated value"
+				implOne.(*typeWithMultipleRequiresImpl).InjectedTypeOne.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -76,7 +76,7 @@ var _ = Describe("Factory", func() {
 
 			It("should not return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne).ShouldNot(Equal(implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeTwo))
+				Ω(implOne.(*typeWithMultipleRequiresImpl).InjectedTypeOne).ShouldNot(Equal(implOne.(*typeWithMultipleRequiresImpl).InjectedTypeTwo))
 			})
 		})
 	})
@@ -87,14 +87,14 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
-					Type: new(TypeWithNoRequires),
+					Type: new(typeWithNoRequires),
 					Instance: func() (interface{}, error) {
-						return &TypeWithValueImpl{Value: "Initial value"}, nil
+						return &typeWithValueImpl{Value: "Initial value"}, nil
 					},
 				})
-				implOne, errOne = factory.GetByType(new(TypeWithNoRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithNoRequires))
-				implTwo.(*TypeWithValueImpl).Value = "Updated value"
+				implOne, errOne = factory.GetByType(new(typeWithNoRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithNoRequires))
+				implTwo.(*typeWithValueImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -113,15 +113,15 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
-					Type: new(TypeWithNoRequires),
+					Type: new(typeWithNoRequires),
 					Instance: func() (interface{}, error) {
-						return &TypeWithValueImpl{Value: "Initial value"}, nil
+						return &typeWithValueImpl{Value: "Initial value"}, nil
 					},
 				})
-				factory.Register(new(TypeWithRequiresImpl))
+				factory.Register(new(typeWithRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
-				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithValueImpl).Value = "Updated value"
+				implTwo.(*typeWithRequiresImpl).InjectedType.(*typeWithValueImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -132,7 +132,7 @@ var _ = Describe("Factory", func() {
 			It("should not return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
 				Ω(implTwo).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithRequiresImpl).InjectedType).ShouldNot(Equal(implTwo.(*TypeWithRequiresImpl).InjectedType))
+				Ω(implOne.(*typeWithRequiresImpl).InjectedType).ShouldNot(Equal(implTwo.(*typeWithRequiresImpl).InjectedType))
 			})
 		})
 
@@ -140,14 +140,14 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
-					Type: new(TypeWithNoRequires),
+					Type: new(typeWithNoRequires),
 					Instance: func() (interface{}, error) {
-						return &TypeWithValueImpl{Value: "Initial value"}, nil
+						return &typeWithValueImpl{Value: "Initial value"}, nil
 					},
 				})
-				factory.Register(new(TypeWithMultipleRequiresImpl))
+				factory.Register(new(typeWithMultipleRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
-				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*TypeWithValueImpl).Value = "Updated value"
+				implOne.(*typeWithMultipleRequiresImpl).InjectedTypeOne.(*typeWithValueImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -156,7 +156,7 @@ var _ = Describe("Factory", func() {
 
 			It("should not return the same implementations", func() {
 				Ω(implOne).ShouldNot(BeNil())
-				Ω(implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne).ShouldNot(Equal(implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeTwo))
+				Ω(implOne.(*typeWithMultipleRequiresImpl).InjectedTypeOne).ShouldNot(Equal(implOne.(*typeWithMultipleRequiresImpl).InjectedTypeTwo))
 			})
 		})
 	})

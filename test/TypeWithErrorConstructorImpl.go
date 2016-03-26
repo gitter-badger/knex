@@ -2,17 +2,18 @@ package test
 
 import "errors"
 
-type TypeWithErrorInjectorImpl struct {
-	TypeWithNoRequires `provide:"resource"`
+type typeWithErrorInjectorImpl struct {
+	typeWithNoRequires `provide:"resource"`
 }
 
-func NewTypeWithErrorInjectorImpl() (*TypeWithErrorInjectorImpl, error) {
+func newTypeWithErrorInjectorImpl() (*typeWithErrorInjectorImpl, error) {
 
-	newInstance := new(TypeWithErrorInjectorImpl)
+	newInstance := new(typeWithErrorInjectorImpl)
 
 	return nil, newInstance.Inject()
 }
 
-func (self *TypeWithErrorInjectorImpl) Inject() error {
+// Inject required dependencies
+func (t *typeWithErrorInjectorImpl) Inject() error {
 	return errors.New("Test error")
 }

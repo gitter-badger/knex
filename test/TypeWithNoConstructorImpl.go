@@ -1,5 +1,5 @@
 package test
 
-type TypeWithNoInjectorImpl struct {
-	TypeWithNoRequires `provide:"resource"`
+type typeWithNoInjectorImpl struct {
+	typeWithNoRequires `provide:"resource"`
 }
