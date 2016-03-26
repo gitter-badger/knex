@@ -109,12 +109,16 @@ iController, err := knex.DefaultFactory.GetByType(new(api.Controller))
 controller := iController.(api.Controller)
 ```
 
+[Factory.GetByType(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetByType) gets an implementation based on a given interface type.  If an implementaion has not been registered or multiple implementations have been registered for this interface type [Factory.GetByType(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetByType) will return an error.
+
 **Get all implementations by type**
 
 ```go
 iFilters, err := knex.DefaultFactory.GetAllOfType(new(spi.Filter))
 filters := iFilters.([]spi.Filter)
 ```
+
+[Factory.GetAllOfType(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetAllOfType) gets all implementations based on a given interface type.  If an implementation has not been registered [Factory.GetAllOfType(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetAllOfType) returns an empty slice.
 
 **Get an implementation by id**
 
@@ -123,6 +127,4 @@ iController, err := knex.DefaultFactory.GetById("controller")
 controller := iController.(api.Controller)
 ```
 
-**Provider scope**
- 
- To do!
+[Factory.GetById(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetById) gets an implementation based on a given id.  If an implementaion has not been registered for the given id [Factory.GetById(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.GetById) will return an error.
