@@ -1,18 +1,18 @@
 package test
 
-type TypeWithNoScopeImpl struct {
+type typeWithNoScopeImpl struct {
 	TypeWithNoRequires `provide:"resource"`
 	Value              string
 }
 
-func NewTypeWithNoScopeImpl() (*TypeWithNoScopeImpl, error) {
+func newTypeWithNoScopeImpl() (*typeWithNoScopeImpl, error) {
 
-	newInstance := new(TypeWithNoScopeImpl)
+	newInstance := new(typeWithNoScopeImpl)
 	newInstance.Value = "Initial value"
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithNoScopeImpl) Inject() error {
+func (t *typeWithNoScopeImpl) Inject() error {
 	return nil
 }
