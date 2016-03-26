@@ -21,7 +21,7 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithIDImpl))
-				impl, err = factory.GetById("testId")
+				impl, err = factory.GetByID("testId")
 			})
 
 			It("should be successful", func() {
@@ -38,8 +38,8 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
-				impl, err = factory.GetById("testId")
+				factory.Register(new(typeWithNoRequiresOneImpl))
+				impl, err = factory.GetByID("testId")
 			})
 
 			It("should return a 'Undeclared resource' error", func() {
@@ -111,7 +111,7 @@ var _ = Describe("Factory", func() {
 	Describe("get a provider, that is required", func() {
 
 		var (
-			impl TypeWithRequires
+			impl typeWithRequires
 			err  error
 		)
 
@@ -123,10 +123,10 @@ var _ = Describe("Factory", func() {
 					Type: new(TypeWithNoRequires),
 					Id:   "testId",
 					Instance: func() (interface{}, error) {
-						return &TypeWithNoRequiresOneImpl{}, nil
+						return &typeWithNoRequiresOneImpl{}, nil
 					},
 				})
-				impl, err = factory.GetById("testId")
+				impl, err = factory.GetByID("testId")
 			})
 
 			It("should be successful", func() {
@@ -135,7 +135,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return an implementaion of the correct type", func() {
 				Ω(impl).ShouldNot(BeNil())
-				Ω(impl).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(impl).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 
@@ -147,7 +147,7 @@ var _ = Describe("Factory", func() {
 					Type: new(TypeWithNoRequires),
 					Id:   "testId",
 					Instance: func() (interface{}, error) {
-						return &TypeWithNoRequiresOneImpl{}, nil
+						return &typeWithNoRequiresOneImpl{}, nil
 					},
 				})
 				factory.Register(new(TypeWithRequiresWithIdImpl))
@@ -159,7 +159,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := NewTypeWithRequiresWithIdImpl(new(TypeWithNoRequiresOneImpl))
+				compareValue, _ := NewTypeWithRequiresWithIdImpl(new(typeWithNoRequiresOneImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -167,7 +167,7 @@ var _ = Describe("Factory", func() {
 			It("should inject the approprite type(s)", func() {
 				value := impl.(*TypeWithRequiresWithIdImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
-				Ω(value).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(value).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 	})

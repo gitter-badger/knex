@@ -1,7 +1,7 @@
 package test
 
 type TypeWithInvalidProvidesImpl struct {
-	TypeWithRequires `provide:"BadValue"`
+	typeWithRequires `provide:"BadValue"`
 }
 
 func NewTypeWithInvalidProvidesImpl() (*TypeWithInvalidProvidesImpl, error) {

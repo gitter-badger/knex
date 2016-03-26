@@ -1,7 +1,7 @@
 package test
 
 type TypeWithMultipleRequiresImpl struct {
-	TypeWithRequires `provide:"resource"`
+	typeWithRequires `provide:"resource"`
 	InjectedTypeOne  TypeWithNoRequires `require:"true"`
 	InjectedTypeTwo  TypeWithNoRequires `require:"true"`
 }

@@ -19,7 +19,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				err = factory.Register(new(TypeWithNoRequiresOneImpl))
+				err = factory.Register(new(typeWithNoRequiresOneImpl))
 			})
 
 			It("should be successful", func() {

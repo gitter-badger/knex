@@ -1,7 +1,7 @@
 package test
 
 type TypeWithSliceRequiresImpl struct {
-	TypeWithRequires `provide:"resource"`
+	typeWithRequires `provide:"resource"`
 	InjectedType     []TypeWithNoRequires `require:"true"`
 }
 

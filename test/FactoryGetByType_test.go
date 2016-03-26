@@ -20,7 +20,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				impl, err = factory.GetByType(new(TypeWithNoRequires))
 			})
 
@@ -30,7 +30,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return an implementaion of the correct type", func() {
 				Ω(impl).ShouldNot(BeNil())
-				Ω(impl).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(impl).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 
@@ -87,7 +87,7 @@ var _ = Describe("Factory", func() {
 		Context("when multiple implementations of the same type have been registered", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithNoRequiresTwoImpl))
 				impl, err = factory.GetByType(new(TypeWithNoRequires))
 			})
@@ -105,7 +105,7 @@ var _ = Describe("Factory", func() {
 	Describe("get an implementation, that does require, by type", func() {
 
 		var (
-			impl TypeWithRequires
+			impl typeWithRequires
 			err  error
 		)
 
@@ -113,9 +113,9 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -123,7 +123,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := NewTypeWithRequiresImpl(new(TypeWithNoRequiresOneImpl))
+				compareValue, _ := NewTypeWithRequiresImpl(new(typeWithNoRequiresOneImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -131,7 +131,7 @@ var _ = Describe("Factory", func() {
 			It("should inject the approprite type(s)", func() {
 				value := impl.(*TypeWithRequiresImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
-				Ω(value).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(value).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 
@@ -139,10 +139,10 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithNoRequiresTwoImpl))
 				factory.Register(new(TypeWithRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should return a 'Multiple implementations for type' error", func() {
@@ -160,7 +160,7 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithErrorInjectorImpl))
 				factory.Register(new(TypeWithRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should fail", func() {
@@ -200,9 +200,9 @@ var _ = Describe("Factory", func() {
 		Context("when the require dependency has been registered", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithOptionalRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -210,7 +210,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := NewTypeWithOptionalRequiresImpl(new(TypeWithNoRequiresOneImpl))
+				compareValue, _ := NewTypeWithOptionalRequiresImpl(new(typeWithNoRequiresOneImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -218,7 +218,7 @@ var _ = Describe("Factory", func() {
 			It("should inject the approprite type(s)", func() {
 				value := impl.(*TypeWithOptionalRequiresImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
-				Ω(value).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(value).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 
@@ -226,7 +226,7 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithOptionalRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -260,7 +260,7 @@ var _ = Describe("Factory", func() {
 				factory.RegisterProvider(knex.Provider{
 					Type: new(TypeWithNoRequires),
 					Instance: func() (interface{}, error) {
-						return &TypeWithNoRequiresOneImpl{}, nil
+						return &typeWithNoRequiresOneImpl{}, nil
 					},
 				})
 				impl, err = factory.GetByType(new(TypeWithNoRequires))
@@ -272,7 +272,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return an implementaion of the correct type", func() {
 				Ω(impl).ShouldNot(BeNil())
-				Ω(impl).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(impl).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 
@@ -283,11 +283,11 @@ var _ = Describe("Factory", func() {
 				factory.RegisterProvider(knex.Provider{
 					Type: new(TypeWithNoRequires),
 					Instance: func() (interface{}, error) {
-						return &TypeWithNoRequiresOneImpl{}, nil
+						return &typeWithNoRequiresOneImpl{}, nil
 					},
 				})
 				factory.Register(new(TypeWithRequiresImpl))
-				impl, err = factory.GetByType(new(TypeWithRequires))
+				impl, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -295,7 +295,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should return an implementaion of the correct type", func() {
-				compareValue, _ := NewTypeWithRequiresImpl(new(TypeWithNoRequiresOneImpl))
+				compareValue, _ := NewTypeWithRequiresImpl(new(typeWithNoRequiresOneImpl))
 				Ω(impl).ShouldNot(BeNil())
 				Ω(impl).Should(BeEquivalentTo(compareValue))
 			})
@@ -303,7 +303,7 @@ var _ = Describe("Factory", func() {
 			It("should inject the approprite type(s)", func() {
 				value := impl.(*TypeWithRequiresImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
-				Ω(value).Should(BeEquivalentTo(new(TypeWithNoRequiresOneImpl)))
+				Ω(value).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})
 		})
 	})

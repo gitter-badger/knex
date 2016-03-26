@@ -21,7 +21,7 @@ var _ = Describe("Factory", func() {
 			Context("when getting by type", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithNoRequiresOneImpl))
+					parent.Register(new(typeWithNoRequiresOneImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					impl, err = child.GetByType(new(TypeWithNoRequires))
@@ -39,7 +39,7 @@ var _ = Describe("Factory", func() {
 			Context("when getting all of type", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithNoRequiresOneImpl))
+					parent.Register(new(typeWithNoRequiresOneImpl))
 					parent.Register(new(TypeWithNoRequiresTwoImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
@@ -52,7 +52,7 @@ var _ = Describe("Factory", func() {
 
 				It("should return the parents' implementation", func() {
 					Ω(impl).ShouldNot(BeNil())
-					Ω(impl).Should(BeEquivalentTo([]TypeWithNoRequires{new(TypeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
+					Ω(impl).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
 				})
 			})
 
@@ -62,7 +62,7 @@ var _ = Describe("Factory", func() {
 					parent.Register(new(typeWithIDImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					impl, err = child.GetById("testId")
+					impl, err = child.GetByID("testId")
 				})
 
 				It("should be successful", func() {
@@ -77,11 +77,11 @@ var _ = Describe("Factory", func() {
 			Context("when getting field by type", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithNoRequiresOneImpl))
+					parent.Register(new(typeWithNoRequiresOneImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					child.Register(new(TypeWithRequiresImpl))
-					impl, err = child.GetByType(new(TypeWithRequires))
+					impl, err = child.GetByType(new(typeWithRequires))
 				})
 
 				It("should be successful", func() {
@@ -96,12 +96,12 @@ var _ = Describe("Factory", func() {
 			Context("when getting field all of type", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithNoRequiresOneImpl))
+					parent.Register(new(typeWithNoRequiresOneImpl))
 					parent.Register(new(TypeWithNoRequiresTwoImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					child.Register(new(TypeWithSliceRequiresImpl))
-					impl, err = child.GetByType(new(TypeWithRequires))
+					impl, err = child.GetByType(new(typeWithRequires))
 				})
 
 				It("should be successful", func() {
@@ -110,7 +110,7 @@ var _ = Describe("Factory", func() {
 
 				It("should return the parents' implementation", func() {
 					Ω(impl).ShouldNot(BeNil())
-					Ω(impl.(*TypeWithSliceRequiresImpl).InjectedType).Should(BeEquivalentTo([]TypeWithNoRequires{new(TypeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
+					Ω(impl.(*TypeWithSliceRequiresImpl).InjectedType).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
 				})
 			})
 

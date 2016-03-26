@@ -44,8 +44,8 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithNoScopeImpl))
 				factory.Register(new(TypeWithRequiresImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
 				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithNoScopeImpl).Value = "Updated value"
 			})
 
@@ -66,7 +66,7 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithNoScopeImpl))
 				factory.Register(new(TypeWithMultipleRequiresImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*TypeWithNoScopeImpl).Value = "Updated value"
 			})
 
@@ -119,8 +119,8 @@ var _ = Describe("Factory", func() {
 					},
 				})
 				factory.Register(new(TypeWithRequiresImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
 				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithValueImpl).Value = "Updated value"
 			})
 
@@ -146,7 +146,7 @@ var _ = Describe("Factory", func() {
 					},
 				})
 				factory.Register(new(TypeWithMultipleRequiresImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*TypeWithValueImpl).Value = "Updated value"
 			})
 

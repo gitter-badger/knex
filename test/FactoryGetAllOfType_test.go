@@ -20,7 +20,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				allValues, err = factory.GetAllOfType(new(TypeWithNoRequires))
 				implSlice = allValues.([]TypeWithNoRequires)
 			})
@@ -31,7 +31,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return an implementaion of the correct type", func() {
 				Ω(implSlice).ShouldNot(BeNil())
-				Ω(implSlice).Should(BeEquivalentTo([]TypeWithNoRequires{new(TypeWithNoRequiresOneImpl)}))
+				Ω(implSlice).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl)}))
 			})
 		})
 
@@ -39,7 +39,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithNoRequiresTwoImpl))
 				allValues, err = factory.GetAllOfType(new(TypeWithNoRequires))
 				implSlice = allValues.([]TypeWithNoRequires)
@@ -51,7 +51,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return implementaions of the correct type", func() {
 				Ω(implSlice).ShouldNot(BeNil())
-				Ω(implSlice).Should(BeEquivalentTo([]TypeWithNoRequires{new(TypeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
+				Ω(implSlice).Should(BeEquivalentTo([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)}))
 			})
 		})
 
@@ -79,10 +79,10 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithNoRequiresTwoImpl))
 				factory.Register(new(TypeWithSliceRequiresImpl))
-				allvalues, err = factory.GetByType(new(TypeWithRequires))
+				allvalues, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -91,7 +91,7 @@ var _ = Describe("Factory", func() {
 
 			It("should return implementaions of the correct type", func() {
 				Ω(allvalues).ShouldNot(BeNil())
-				impl, _ := NewTypeWithSliceRequiresImpl([]TypeWithNoRequires{new(TypeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)})
+				impl, _ := NewTypeWithSliceRequiresImpl([]TypeWithNoRequires{new(typeWithNoRequiresOneImpl), new(TypeWithNoRequiresTwoImpl)})
 				Ω(allvalues).Should(BeEquivalentTo(impl))
 			})
 		})
@@ -103,7 +103,7 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithSliceRequiresImpl))
-				allvalues, err = factory.GetByType(new(TypeWithRequires))
+				allvalues, err = factory.GetByType(new(typeWithRequires))
 			})
 
 			It("should be successful", func() {
@@ -123,7 +123,7 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoRequiresOneImpl))
+				factory.Register(new(typeWithNoRequiresOneImpl))
 				factory.Register(new(TypeWithErrorInjectorImpl))
 				allvalues, err = factory.GetAllOfType(new(TypeWithNoRequires))
 			})

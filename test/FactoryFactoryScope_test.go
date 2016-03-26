@@ -44,8 +44,8 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithFactoryScopeImpl))
 				factory.Register(new(TypeWithRequiresImpl))
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
 				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithFactoryScopeImpl).Value = "Updated value"
 			})
 
@@ -103,8 +103,8 @@ var _ = Describe("Factory", func() {
 					},
 				})
 
-				implOne, errOne = factory.GetByType(new(TypeWithRequires))
-				implTwo, errTwo = factory.GetByType(new(TypeWithRequires))
+				implOne, errOne = factory.GetByType(new(typeWithRequires))
+				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
 				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithValueImpl).Value = "Updated value"
 			})
 
