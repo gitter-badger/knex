@@ -76,7 +76,7 @@ func (self *SimpleControllerImpl) ApplyFilters(string) (string, error) {...}
 func (self *SimpleControllerImpl) WriteMessage(string) error {...}
 ```
 
-[SimpleControllerImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/SimpleControllerImpl.go) is an implementation of the [Controller](https://github.com/chrisehlen/knex-example/blob/master/api/Controller.go) interface that sends all input to standard output. [SimpleControllerImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/SimpleControllerImpl.go) has three requires so it's Inject() method has three arguments which are in the order they are defined in the struct.
+[SimpleControllerImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/SimpleControllerImpl.go) is an implementation of the [Controller](https://github.com/chrisehlen/knex-example/blob/master/api/Controller.go) interface that delegates calls to its dependencies. [SimpleControllerImpl](https://github.com/chrisehlen/knex-example/blob/master/lib/SimpleControllerImpl.go) has three requires so it's Inject() method has three arguments which are in the order they are defined in the struct.
 
 **Register components**
 
@@ -100,7 +100,7 @@ func (self *SimpleControllerImpl) WriteMessage(string) error {...}
 knex.DefaultFactory.AddParent(spiFactory)
 ```
 
-[Factory.AddParent(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.AddParent) assignes a parent factory to a child factory.  If an implementaion an not be retrieved from a child factory then the child factory will check if the implementaion can be retrieved from one of its parents.
+[Factory.AddParent(...)](https://godoc.org/github.com/chrisehlen/knex#Factory.AddParent) assignes a parent factory to a child factory.  If an implementation can not be retrieved from a child factory then the child factory will check if the implementation can be retrieved from one of its parents.
 
 **Get an implementation by type**
 
