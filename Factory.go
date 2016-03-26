@@ -494,7 +494,7 @@ func (f *Factory) nilErrorValue() reflect.Value {
 func (f *Factory) registerImplWithID(implDetail *implementationDetail) {
 
 	// Add implemetaion based on id tag value.
-	id := implDetail.resourceDetail.provider.Id
+	id := implDetail.resourceDetail.provider.ID
 	if id != "" {
 		f.idMap[id] = implDetail
 	}

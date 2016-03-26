@@ -64,8 +64,8 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithIDImpl))
-				factory.Register(new(typeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(typeWithRequiresWithId))
+				factory.Register(new(typeWithRequiresWithIDImpl))
+				impl, err = factory.GetByType(new(typeWithRequiresWithID))
 			})
 
 			It("should be successful", func() {
@@ -79,7 +79,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should inject the approprite type(s)", func() {
-				value := impl.(*typeWithRequiresWithIdImpl).InjectedType
+				value := impl.(*typeWithRequiresWithIDImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
 				Ω(value).Should(BeEquivalentTo(new(typeWithIDImpl)))
 			})
@@ -94,8 +94,8 @@ var _ = Describe("Factory", func() {
 
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(typeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(typeWithRequiresWithId))
+				factory.Register(new(typeWithRequiresWithIDImpl))
+				impl, err = factory.GetByType(new(typeWithRequiresWithID))
 			})
 
 			It("should return a 'Undeclared resource' error", func() {
@@ -121,7 +121,7 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
 					Type: new(typeWithNoRequires),
-					Id:   "testId",
+					ID:   "testId",
 					Instance: func() (interface{}, error) {
 						return &typeWithNoRequiresOneImpl{}, nil
 					},
@@ -145,13 +145,13 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.RegisterProvider(knex.Provider{
 					Type: new(typeWithNoRequires),
-					Id:   "testId",
+					ID:   "testId",
 					Instance: func() (interface{}, error) {
 						return &typeWithNoRequiresOneImpl{}, nil
 					},
 				})
-				factory.Register(new(typeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(typeWithRequiresWithId))
+				factory.Register(new(typeWithRequiresWithIDImpl))
+				impl, err = factory.GetByType(new(typeWithRequiresWithID))
 			})
 
 			It("should be successful", func() {
@@ -165,7 +165,7 @@ var _ = Describe("Factory", func() {
 			})
 
 			It("should inject the approprite type(s)", func() {
-				value := impl.(*typeWithRequiresWithIdImpl).InjectedType
+				value := impl.(*typeWithRequiresWithIDImpl).InjectedType
 				Ω(value).ShouldNot(BeNil())
 				Ω(value).Should(BeEquivalentTo(new(typeWithNoRequiresOneImpl)))
 			})

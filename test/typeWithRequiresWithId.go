@@ -1,4 +1,4 @@
 package test
 
-type typeWithRequiresWithId interface {
+type typeWithRequiresWithID interface {
 }

@@ -120,8 +120,8 @@ var _ = Describe("Factory", func() {
 					parent.Register(new(typeWithIDImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
-					child.Register(new(typeWithRequiresWithIdImpl))
-					impl, err = child.GetByType(new(typeWithRequiresWithId))
+					child.Register(new(typeWithRequiresWithIDImpl))
+					impl, err = child.GetByType(new(typeWithRequiresWithID))
 				})
 
 				It("should be successful", func() {
@@ -129,7 +129,7 @@ var _ = Describe("Factory", func() {
 				})
 
 				It("should return the parents' implementation", func() {
-					Ω(impl.(*typeWithRequiresWithIdImpl).InjectedType).ShouldNot(BeNil())
+					Ω(impl.(*typeWithRequiresWithIDImpl).InjectedType).ShouldNot(BeNil())
 				})
 			})
 		})

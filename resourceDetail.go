@@ -33,7 +33,7 @@ func newResourceDetail(implementationType interface{}) (*resourceDetail, error) 
 			// Check for 'id' tag value.
 			idTagValue := strings.Trim(field.Tag.Get(idTagName), " ")
 			if idTagValue != emptyString {
-				resourceDetail.provider.Id = idTagValue
+				resourceDetail.provider.ID = idTagValue
 			}
 
 			// Check if 'scope' field value is valid.
@@ -73,7 +73,6 @@ func newResourceDetailByProvider(provider *Provider) (*resourceDetail, error) {
 func validateScopeValue(value string) bool {
 	if value == emptyString || value == factoryValue || value == graphValue {
 		return true
-	} else {
-		return false
 	}
+	return false
 }

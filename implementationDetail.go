@@ -60,41 +60,40 @@ func newImplementationDetailByProvider(provider Provider) (*implementationDetail
 	return implDetail, nil
 }
 
-func (self *implementationDetail) callInjector(typeSet *typeSet, graphScopeMap map[interface{}]reflect.Value) []reflect.Value {
+func (i *implementationDetail) callInjector(typeSet *typeSet, graphScopeMap map[interface{}]reflect.Value) []reflect.Value {
 
 	// Create new instance of implementation.
-	newInstance := reflect.New(self.implType.Elem())
+	newInstance := reflect.New(i.implType.Elem())
 
 	// Get list of arguments to pass into injector method.
 	arguments := []reflect.Value{newInstance}
-	for _, field := range self.fieldSlice {
-		resourceResult := self.getResource(field, typeSet, graphScopeMap)
+	for _, field := range i.fieldSlice {
+		resourceResult := i.getResource(field, typeSet, graphScopeMap)
 		if !resourceResult[1].IsNil() {
 			return resourceResult
-		} else {
-			arguments = append(arguments, resourceResult[0])
 		}
+		arguments = append(arguments, resourceResult[0])
 	}
 
 	// Call injector method.
-	injectResult := self.injector.Func.Call(arguments)
+	injectResult := i.injector.Func.Call(arguments)
 	if !injectResult[0].IsNil() {
-		return []reflect.Value{reflect.Zero(self.implType), injectResult[0]}
+		return []reflect.Value{reflect.Zero(i.implType), injectResult[0]}
 	}
 
 	// Return implementation.
 	return []reflect.Value{newInstance, reflect.Zero(reflect.TypeOf(errors.New("")))}
 }
 
-func (self *implementationDetail) GetImplType() reflect.Type {
-	return self.implType
+func (i *implementationDetail) GetImplType() reflect.Type {
+	return i.implType
 }
 
-func (self *implementationDetail) HasInjector() bool {
-	return self.injector == (reflect.Method{})
+func (i *implementationDetail) HasInjector() bool {
+	return i.injector == (reflect.Method{})
 }
 
-func (self *implementationDetail) getInjectableFields(implementationType interface{}) ([]reflect.StructField, error) {
+func (i *implementationDetail) getInjectableFields(implementationType interface{}) ([]reflect.StructField, error) {
 
 	// Find all injectable fields.
 	var returnValue []reflect.StructField
@@ -116,14 +115,13 @@ func (self *implementationDetail) getInjectableFields(implementationType interfa
 	return returnValue, nil
 }
 
-func (self *implementationDetail) getInjector(implementationType interface{}) reflect.Method {
+func (i *implementationDetail) getInjector(implementationType interface{}) reflect.Method {
 
 	// Check if implementation has an injector method.
 	reflectType := reflect.TypeOf(implementationType)
 	implementationInjector, hasInjector := reflectType.MethodByName(injectorName)
 	if hasInjector {
 		return implementationInjector
-	} else {
-		return reflect.Method{}
 	}
+	return reflect.Method{}
 }

@@ -1,8 +1,9 @@
 package knex
 
+// Provider defines a custom constructor method for type implementations.
 type Provider struct {
 	Type     interface{}
-	Id       string
+	ID       string
 	Scope    string
 	Instance func() (interface{}, error)
 }

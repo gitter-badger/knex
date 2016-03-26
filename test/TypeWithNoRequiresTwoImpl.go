@@ -4,7 +4,7 @@ type typeWithNoRequiresTwoImpl struct {
 	typeWithNoRequires `provide:"resource"`
 }
 
-func NewTypeWithNoRequiresTwoImpl() (*typeWithNoRequiresTwoImpl, error) {
+func newTypeWithNoRequiresTwoImpl() (*typeWithNoRequiresTwoImpl, error) {
 
 	newInstance := new(typeWithNoRequiresTwoImpl)
 
