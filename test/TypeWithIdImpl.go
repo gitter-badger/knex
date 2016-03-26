@@ -1,16 +1,16 @@
 package test
 
-type TypeWithIdImpl struct {
+type typeWithIdImpl struct {
 	TypeWithNoRequires `provide:"resource" id:"testId"`
 }
 
-func NewTypeWithIdImpl(injectedType TypeWithNoRequires) (*TypeWithIdImpl, error) {
+func NewTypeWithIdImpl(injectedType TypeWithNoRequires) (*typeWithIdImpl, error) {
 
-	newInstance := new(TypeWithIdImpl)
+	newInstance := new(typeWithIdImpl)
 
 	return newInstance, newInstance.Inject()
 }
 
-func (self *TypeWithIdImpl) Inject() error {
+func (self *typeWithIdImpl) Inject() error {
 	return nil
 }

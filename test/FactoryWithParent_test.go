@@ -59,7 +59,7 @@ var _ = Describe("Factory", func() {
 			Context("when getting by id", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithIdImpl))
+					parent.Register(new(typeWithIdImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					impl, err = child.GetById("testId")
@@ -117,7 +117,7 @@ var _ = Describe("Factory", func() {
 			Context("when getting field by id", func() {
 				BeforeEach(func() {
 					parent := knex.NewFactory()
-					parent.Register(new(TypeWithIdImpl))
+					parent.Register(new(typeWithIdImpl))
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					child.Register(new(TypeWithRequiresWithIdImpl))
