@@ -21,10 +21,10 @@ var _ = Describe("Factory", func() {
 		Context("when there are no requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoScopeImpl))
+				factory.Register(new(typeWithNoScopeImpl))
 				implOne, errOne = factory.GetByType(new(TypeWithNoRequires))
 				implTwo, errTwo = factory.GetByType(new(TypeWithNoRequires))
-				implTwo.(*TypeWithNoScopeImpl).Value = "Updated value"
+				implTwo.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -42,11 +42,11 @@ var _ = Describe("Factory", func() {
 		Context("when there are requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoScopeImpl))
+				factory.Register(new(typeWithNoScopeImpl))
 				factory.Register(new(TypeWithRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
 				implTwo, errTwo = factory.GetByType(new(typeWithRequires))
-				implTwo.(*TypeWithRequiresImpl).InjectedType.(*TypeWithNoScopeImpl).Value = "Updated value"
+				implTwo.(*TypeWithRequiresImpl).InjectedType.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {
@@ -64,10 +64,10 @@ var _ = Describe("Factory", func() {
 		Context("when there are muliple requires", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
-				factory.Register(new(TypeWithNoScopeImpl))
+				factory.Register(new(typeWithNoScopeImpl))
 				factory.Register(new(TypeWithMultipleRequiresImpl))
 				implOne, errOne = factory.GetByType(new(typeWithRequires))
-				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*TypeWithNoScopeImpl).Value = "Updated value"
+				implOne.(*TypeWithMultipleRequiresImpl).InjectedTypeOne.(*typeWithNoScopeImpl).Value = "Updated value"
 			})
 
 			It("should be successful", func() {

@@ -1,7 +1,7 @@
 package test
 
 type TypeWithRequiresWithIdImpl struct {
-	TypeWithRequiresWithId `provide:"resource"`
+	typeWithRequiresWithId `provide:"resource"`
 	InjectedType           TypeWithNoRequires `require:"true" id:"testId"`
 }
 

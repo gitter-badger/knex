@@ -121,7 +121,7 @@ var _ = Describe("Factory", func() {
 					child := knex.NewFactory()
 					child.AddParent(parent)
 					child.Register(new(TypeWithRequiresWithIdImpl))
-					impl, err = child.GetByType(new(TypeWithRequiresWithId))
+					impl, err = child.GetByType(new(typeWithRequiresWithId))
 				})
 
 				It("should be successful", func() {

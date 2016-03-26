@@ -65,7 +65,7 @@ var _ = Describe("Factory", func() {
 				factory := knex.NewFactory()
 				factory.Register(new(typeWithIDImpl))
 				factory.Register(new(TypeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(TypeWithRequiresWithId))
+				impl, err = factory.GetByType(new(typeWithRequiresWithId))
 			})
 
 			It("should be successful", func() {
@@ -95,7 +95,7 @@ var _ = Describe("Factory", func() {
 			BeforeEach(func() {
 				factory := knex.NewFactory()
 				factory.Register(new(TypeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(TypeWithRequiresWithId))
+				impl, err = factory.GetByType(new(typeWithRequiresWithId))
 			})
 
 			It("should return a 'Undeclared resource' error", func() {
@@ -151,7 +151,7 @@ var _ = Describe("Factory", func() {
 					},
 				})
 				factory.Register(new(TypeWithRequiresWithIdImpl))
-				impl, err = factory.GetByType(new(TypeWithRequiresWithId))
+				impl, err = factory.GetByType(new(typeWithRequiresWithId))
 			})
 
 			It("should be successful", func() {
